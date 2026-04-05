@@ -15,6 +15,8 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Check and update status.json
+        env:
+          MCP_MONITOR_KEY: ${{ secrets.MCP_MONITOR_KEY }}
         run: |
           python3 - << 'PYEOF'
           import json, subprocess
@@ -24,24 +26,63 @@ jobs:
           now_str = now.strftime('%Y-%m-%dT%H:%M:%SZ')
           today_str = now.strftime('%Y-%m-%d')
 
-          # Check API health
-          result = subprocess.run(
-              ['curl', '-s', '-o', '/dev/null', '-w', '%{http_code}', '--max-time', '10',
-               'https://api.morgenruf.dev/healthz'],
-              capture_output=True, text=True
-          )
-          http_code = result.stdout.strip()
-          status = 'operational' if http_code == '200' else 'outage'
-          print(f'API health check: HTTP {http_code} → {status}')
+          import os
+
+          def check_http(url, headers=None):
+              cmd = ['curl', '-s', '-o', '/dev/null', '-w', '%{http_code}', '--max-time', '10', url]
+              if headers:
+                  for k, v in headers.items():
+                      cmd += ['-H', f'{k}: {v}']
+              r = subprocess.run(cmd, capture_output=True, text=True)
+              code = r.stdout.strip()
+              return code, 'operational' if code == '200' else 'outage'
+
+          def check_mcp(key):
+              if not key:
+                  return 'operational'  # skip if no key
+              cmd = ['curl', '-s', '-o', '/dev/null', '-w', '%{http_code}', '--max-time', '10',
+                     '-X', 'POST', 'https://api.morgenruf.dev/mcp',
+                     '-H', f'Authorization: Bearer {key}',
+                     '-H', 'Content-Type: application/json',
+                     '-d', '{"jsonrpc":"2.0","method":"tools/list","id":1}']
+              r = subprocess.run(cmd, capture_output=True, text=True)
+              code = r.stdout.strip()
+              return 'operational' if code == '200' else 'outage'
+
+          mcp_key = os.environ.get('MCP_MONITOR_KEY', '')
+
+          # Check each service individually
+          api_code, api_status = check_http('https://api.morgenruf.dev/healthz')
+          dash_code, dash_status = check_http('https://api.morgenruf.dev/dashboard')
+          mcp_status = check_mcp(mcp_key)
+
+          print(f'API: HTTP {api_code} → {api_status}')
+          print(f'Dashboard: HTTP {dash_code} → {dash_status}')
+          print(f'MCP: → {mcp_status}')
+
+          service_statuses = {
+              'api': api_status,
+              'dashboard': dash_status,
+              'db': api_status,        # DB failing = API failing
+              'scheduler': api_status, # scheduler = part of API
+              'mcp': mcp_status,
+          }
+
+          overall = 'operational' if all(s == 'operational' for s in service_statuses.values()) else 'outage'
 
           with open('status.json') as f:
               data = json.load(f)
 
           data['updated_at'] = now_str
-          data['overall'] = status
+          data['overall'] = overall
+
+          # Ensure MCP service exists
+          existing_slugs = {s['slug'] for s in data['services']}
+          if 'mcp' not in existing_slugs:
+              data['services'].append({'name': 'MCP API', 'slug': 'mcp', 'status': 'operational', 'uptime_90d': 100.0, 'history': []})
 
           for svc in data['services']:
-              svc['status'] = status
+              svc['status'] = service_statuses.get(svc['slug'], overall)
               history = svc.get('history', [])
               today_entry = next((h for h in history if h['date'] == today_str), None)
               if today_entry:
