@@ -28,14 +28,14 @@ jobs:
 
           import os
 
-          def check_http(url, headers=None):
+          def check_http(url, headers=None, ok_codes=('200',)):
               cmd = ['curl', '-s', '-o', '/dev/null', '-w', '%{http_code}', '--max-time', '10', url]
               if headers:
                   for k, v in headers.items():
                       cmd += ['-H', f'{k}: {v}']
               r = subprocess.run(cmd, capture_output=True, text=True)
               code = r.stdout.strip()
-              return code, 'operational' if code == '200' else 'outage'
+              return code, 'operational' if code in ok_codes else 'outage'
 
           def check_mcp(key):
               if not key:
@@ -53,7 +53,7 @@ jobs:
 
           # Check each service individually
           api_code, api_status = check_http('https://api.morgenruf.dev/healthz')
-          dash_code, dash_status = check_http('https://api.morgenruf.dev/dashboard')
+          dash_code, dash_status = check_http('https://api.morgenruf.dev/dashboard', ok_codes=('200', '302'))
           mcp_status = check_mcp(mcp_key)
 
           print(f'API: HTTP {api_code} → {api_status}')
@@ -86,9 +86,9 @@ jobs:
               history = svc.get('history', [])
               today_entry = next((h for h in history if h['date'] == today_str), None)
               if today_entry:
-                  today_entry['status'] = status
+                  today_entry['status'] = svc['status']
               else:
-                  history.append({'date': today_str, 'status': status})
+                  history.append({'date': today_str, 'status': svc['status']})
               svc['history'] = sorted(history, key=lambda x: x['date'])[-90:]
               if svc['history']:
                   up = sum(1 for h in svc['history'] if h['status'] == 'operational')
@@ -97,7 +97,7 @@ jobs:
           with open('status.json', 'w') as f:
               json.dump(data, f, indent=2)
 
-          print(f'Updated status.json: overall={status}, updated_at={now_str}')
+          print(f'Updated status.json: overall={overall}, updated_at={now_str}')
           PYEOF
 
       - name: Commit if changed
