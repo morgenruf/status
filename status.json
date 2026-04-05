@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-04-05T16:02:53Z",
+  "updated_at": "2026-04-05T16:54:07Z",
   "overall": "operational",
   "services": [
     {
@@ -41,6 +41,18 @@
     {
       "name": "Scheduler",
       "slug": "scheduler",
+      "status": "operational",
+      "uptime_90d": 100.0,
+      "history": [
+        {
+          "date": "2026-04-05",
+          "status": "operational"
+        }
+      ]
+    },
+    {
+      "name": "MCP API",
+      "slug": "mcp",
       "status": "operational",
       "uptime_90d": 100.0,
       "history": [
