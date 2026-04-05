@@ -1,34 +1,54 @@
 {
-  "updated_at": "2026-04-05T15:00:00Z",
+  "updated_at": "2026-04-05T16:02:53Z",
   "overall": "operational",
   "services": [
     {
       "name": "Slack Bot API",
       "slug": "api",
       "status": "operational",
-      "uptime_90d": 99.9,
-      "history": []
+      "uptime_90d": 100.0,
+      "history": [
+        {
+          "date": "2026-04-05",
+          "status": "operational"
+        }
+      ]
     },
     {
       "name": "Web Dashboard",
       "slug": "dashboard",
       "status": "operational",
-      "uptime_90d": 99.9,
-      "history": []
+      "uptime_90d": 100.0,
+      "history": [
+        {
+          "date": "2026-04-05",
+          "status": "operational"
+        }
+      ]
     },
     {
       "name": "Database",
       "slug": "db",
       "status": "operational",
-      "uptime_90d": 99.9,
-      "history": []
+      "uptime_90d": 100.0,
+      "history": [
+        {
+          "date": "2026-04-05",
+          "status": "operational"
+        }
+      ]
     },
     {
       "name": "Scheduler",
       "slug": "scheduler",
       "status": "operational",
-      "uptime_90d": 99.9,
-      "history": []
+      "uptime_90d": 100.0,
+      "history": [
+        {
+          "date": "2026-04-05",
+          "status": "operational"
+        }
+      ]
     }
   ],
   "incidents": []
