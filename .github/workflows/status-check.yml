@@ -39,7 +39,8 @@ jobs:
 
           def check_mcp(key):
               if not key:
-                  return 'operational'  # skip if no key
+                  print('::warning::MCP_MONITOR_KEY secret is not set — reporting MCP status as unknown')
+                  return 'unknown'
               cmd = ['curl', '-s', '-o', '/dev/null', '-w', '%{http_code}', '--max-time', '10',
                      '-X', 'POST', 'https://api.morgenruf.dev/mcp',
                      '-H', f'Authorization: Bearer {key}',
