@@ -1,6 +1,6 @@
 {
-  "updated_at": "2026-04-14T06:12:08Z",
-  "overall": "operational",
+  "updated_at": "2026-04-14T08:02:56Z",
+  "overall": "outage",
   "services": [
     {
       "name": "Slack Bot API",
@@ -197,8 +197,8 @@
     {
       "name": "MCP API",
       "slug": "mcp",
-      "status": "operational",
-      "uptime_90d": 100.0,
+      "status": "outage",
+      "uptime_90d": 90.0,
       "history": [
         {
           "date": "2026-04-05",
@@ -238,7 +238,7 @@
         },
         {
           "date": "2026-04-14",
-          "status": "operational"
+          "status": "outage"
         }
       ]
     }
