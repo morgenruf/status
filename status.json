@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-04-26T23:53:50Z",
+  "updated_at": "2026-04-27T01:17:54Z",
   "overall": "operational",
   "services": [
     {
@@ -94,6 +94,10 @@
         },
         {
           "date": "2026-04-26",
+          "status": "operational"
+        },
+        {
+          "date": "2026-04-27",
           "status": "operational"
         }
       ]
@@ -191,6 +195,10 @@
         {
           "date": "2026-04-26",
           "status": "operational"
+        },
+        {
+          "date": "2026-04-27",
+          "status": "operational"
         }
       ]
     },
@@ -286,6 +294,10 @@
         },
         {
           "date": "2026-04-26",
+          "status": "operational"
+        },
+        {
+          "date": "2026-04-27",
           "status": "operational"
         }
       ]
@@ -383,6 +395,10 @@
         {
           "date": "2026-04-26",
           "status": "operational"
+        },
+        {
+          "date": "2026-04-27",
+          "status": "operational"
         }
       ]
     },
@@ -478,6 +494,10 @@
         },
         {
           "date": "2026-04-26",
+          "status": "operational"
+        },
+        {
+          "date": "2026-04-27",
           "status": "operational"
         }
       ]
