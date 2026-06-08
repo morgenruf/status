@@ -1,6 +1,6 @@
 {
-  "updated_at": "2026-06-08T18:05:46Z",
-  "overall": "outage",
+  "updated_at": "2026-06-08T20:29:00Z",
+  "overall": "operational",
   "services": [
     {
       "name": "Slack Bot API",
@@ -273,8 +273,8 @@
     {
       "name": "Web Dashboard",
       "slug": "dashboard",
-      "status": "outage",
-      "uptime_90d": 98.46,
+      "status": "operational",
+      "uptime_90d": 100.0,
       "history": [
         {
           "date": "2026-04-05",
@@ -534,7 +534,7 @@
         },
         {
           "date": "2026-06-08",
-          "status": "outage"
+          "status": "operational"
         }
       ]
     },
