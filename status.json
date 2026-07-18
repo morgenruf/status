@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-07-17T23:59:36Z",
+  "updated_at": "2026-07-18T02:30:57Z",
   "overall": "operational",
   "services": [
     {
@@ -8,10 +8,6 @@
       "status": "operational",
       "uptime_90d": 100.0,
       "history": [
-        {
-          "date": "2026-04-19",
-          "status": "operational"
-        },
         {
           "date": "2026-04-20",
           "status": "operational"
@@ -366,6 +362,10 @@
         },
         {
           "date": "2026-07-17",
+          "status": "operational"
+        },
+        {
+          "date": "2026-07-18",
           "status": "operational"
         }
       ]
@@ -377,10 +377,6 @@
       "uptime_90d": 100.0,
       "history": [
         {
-          "date": "2026-04-19",
-          "status": "operational"
-        },
-        {
           "date": "2026-04-20",
           "status": "operational"
         },
@@ -734,6 +730,10 @@
         },
         {
           "date": "2026-07-17",
+          "status": "operational"
+        },
+        {
+          "date": "2026-07-18",
           "status": "operational"
         }
       ]
@@ -745,10 +745,6 @@
       "uptime_90d": 100.0,
       "history": [
         {
-          "date": "2026-04-19",
-          "status": "operational"
-        },
-        {
           "date": "2026-04-20",
           "status": "operational"
         },
@@ -1102,6 +1098,10 @@
         },
         {
           "date": "2026-07-17",
+          "status": "operational"
+        },
+        {
+          "date": "2026-07-18",
           "status": "operational"
         }
       ]
@@ -1113,10 +1113,6 @@
       "uptime_90d": 100.0,
       "history": [
         {
-          "date": "2026-04-19",
-          "status": "operational"
-        },
-        {
           "date": "2026-04-20",
           "status": "operational"
         },
@@ -1470,6 +1466,10 @@
         },
         {
           "date": "2026-07-17",
+          "status": "operational"
+        },
+        {
+          "date": "2026-07-18",
           "status": "operational"
         }
       ]
@@ -1481,10 +1481,6 @@
       "uptime_90d": 100.0,
       "history": [
         {
-          "date": "2026-04-19",
-          "status": "operational"
-        },
-        {
           "date": "2026-04-20",
           "status": "operational"
         },
@@ -1838,6 +1834,10 @@
         },
         {
           "date": "2026-07-17",
+          "status": "operational"
+        },
+        {
+          "date": "2026-07-18",
           "status": "operational"
         }
       ]
